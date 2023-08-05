@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GeniusChef.Shared
 {
-    internal class Ingredient
+    public class Ingredient
     {
         public Guid Id { get; set; }
         public string? Description { get; set; }

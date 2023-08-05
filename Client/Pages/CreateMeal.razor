@@ -2,6 +2,7 @@
 @using GeniusChef.Shared;
 @using Microsoft.AspNetCore.Components.Forms;
 @using System.ComponentModel.DataAnnotations;
+@inject NavigationManager navigationManager;
 
 <PageTitle>Genius Chef - Create Meal</PageTitle>
 
@@ -38,10 +39,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    @foreach (var item in ingredients)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.Description
+                                            </td>
+                                            <td class="text-end  pe-3">
+                                                <button class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-warning rounded">Generate</button>
                     </div>
                 </div>
             </EditForm>
@@ -53,7 +67,7 @@
 
 @code {
     private EditContext? editcontext;
-
+    private List<Ingredient> ingredients = new List<Ingredient>();
     private Meal meal = new();
 
     protected override void OnInitialized()
