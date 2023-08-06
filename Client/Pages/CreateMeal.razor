@@ -27,8 +27,8 @@
                         <InputText placeholder="Add Ingredient" maxlength="30" @bind-Value="meal.ingredient" class="form-control mb-2"></InputText>
                     </div>
                     <div class="col-12">
-                        <button class="btn btn-outline-primary">Add</button>
-                        <button class="btn btn-outline-danger">Clear</button>
+                        <button class="btn btn-outline-primary" @onclick="AddIngredient">Add</button>
+                        <button class="btn btn-outline-danger" @onclick="RemoveAll">Clear</button>
                     </div>
                     <div class="col-12 mt-3">
                         <div class="table-responsive">
@@ -46,7 +46,8 @@
                                                 @item.Description
                                             </td>
                                             <td class="text-end  pe-3">
-                                                <button class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
+                                                @*pour la fonction onclick() RemoveIngredient comme il y a un parametre item.Id on doit appeler une fonction anonyme*@
+                                                <button class="btn btn-outline-danger" @onclick="() => RemoveIngredient(item.Id)"><i class="bi bi-trash-fill"></i></button>
                                             </td>
                                         </tr>
                                     }
@@ -80,4 +81,31 @@
         public string? mealtime { get; set; }
         public string? ingredient { get; set; }
     }
+
+    private void AddIngredient()
+    {
+        if (!string.IsNullOrEmpty(meal.ingredient))
+        {
+            ingredients.Add(new Ingredient()
+                {
+                    Id = Guid.NewGuid(),
+                    Description = meal.ingredient
+                }
+            );
+        }
+
+        //Clear the text box
+        meal.ingredient = string.Empty;
+    }
+
+    private void RemoveAll()
+    {
+        ingredients.Clear();
+    }
+
+    private void RemoveIngredient(Guid id)
+    {
+        ingredients.Remove(ingredients.First(x => x.Id == id));
+    }
+
 }
