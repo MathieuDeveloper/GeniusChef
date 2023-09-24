@@ -67,13 +67,27 @@
 
 
 @code {
+    [CascadingParameter]
+    private RecipeState? rState { get; set; }
+
     private EditContext? editcontext;
     private List<Ingredient> ingredients = new List<Ingredient>();
     private Meal meal = new();
 
+
+
     protected override void OnInitialized()
     {
+        if (rState is null)
+        {
+            navigationManager.NavigateTo("/", forceLoad: true);
+            return;
+        }
+
         editcontext = new(meal);
+
+        meal.mealtime = rState.MealTime;
+        ingredients = rState.Ingredients;
     }
 
     private class Meal
