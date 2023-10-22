@@ -124,6 +124,8 @@
 
     private void HandleSubmit()
     {
+        rState.MealTime = meal.mealtime;
+        rState.Ingredients = ingredients;
         navigationManager.NavigateTo("/mealIdeas");
     }
 
