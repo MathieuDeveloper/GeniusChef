@@ -1,6 +1,8 @@
 ﻿@page "/mealIdeas"
 @using GeniusChef.Shared
+@using System.Text.Json
 @inject NavigationManager navigationManager;
+@inject HttpClient Http;
 
 @if (loaded == true)
 {
@@ -58,6 +60,23 @@ else
 
     private async void GetIdeas()
     {
-        
+        string baseuri = "Recipe/GetRecipeIdeas";
+        loaded = false;
+
+        RecipeParms recipeParms = new RecipeParms()
+            {
+                MealTime = rState.MealTime,
+                Ingredients = rState.Ingredients
+            };
+
+        //call web api controller
+        try
+        {
+            Http
+        }
+        catch
+        {
+            
+        }
     }
 }
