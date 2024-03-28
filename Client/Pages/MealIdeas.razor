@@ -38,6 +38,13 @@ else
     [CascadingParameter]
     private RecipeState rState { get; set; }
 
+    private readonly JsonSerializerOptions _jsonOptions = new()
+        {
+            PropertyNameCaseInsensitive = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
+        };
+
     protected override void OnInitialized()
     {
         if (rState is null)
@@ -72,7 +79,11 @@ else
         //call web api controller
         try
         {
-            Http
+            HttpResponseMessage response = await Http.PostAsJsonAsync(baseuri, recipeParms, _jsonOptions);
+
+            response.EnsureSuccessStatusCode();
+
+            ideas = (await response.Content.ReadFromJsonAsync<List<Idea>>())!;
         }
         catch
         {
