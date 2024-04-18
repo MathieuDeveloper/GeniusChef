@@ -33,7 +33,8 @@ else
 @code {
 
     private List<Idea> ideas = new List<Idea>();
-    private bool loaded = false;
+    //private bool loaded = false;
+    private bool loaded = true;
 
 
     [CascadingParameter]
@@ -69,7 +70,8 @@ else
     private async void GetIdeas()
     {
         string baseuri = "Recipe/GetRecipeIdeas";
-        loaded = false;
+        //loaded = false;
+        loaded = true;
 
         RecipeParms recipeParms = new RecipeParms()
             {

@@ -12,7 +12,7 @@ namespace GeniusChef.Server.Controllers
         [HttpPost, Route("GetRecipeIdeas")]
         public async Task<ActionResult<List<Idea>>> GetRecipeIdeas(RecipeParms recipeParms)
         {
-            return SampleData.RecipeIdeas;
+             return SampleData.RecipeIdeas;
         }
 
     }
