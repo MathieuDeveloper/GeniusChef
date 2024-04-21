@@ -5,8 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeniusChef.Server.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
+    
     public class RecipeController : ControllerBase
     {
         [HttpPost, Route("GetRecipeIdeas")]
